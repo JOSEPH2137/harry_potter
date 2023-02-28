@@ -3,32 +3,12 @@ package com.example.harry_potter;
 
 import java.util.Scanner;
 import java.util.Random;
+import static com.example.harry_potter.Level1.level1;
 
 public class Main {
+    private static Player player;
+
     public static void main(String[] args) {
-        class Wand{
-            int coreWand;
-            int sizeWand;
-
-            public Wand(int coreWand, int sizeWand){
-                this.coreWand = coreWand;
-                this.sizeWand = sizeWand;
-            }
-        }
-        class Player{
-            String playerName;
-            Wand wand;
-            int pet;
-            int house;
-
-            public Player(String playerName, Wand wand,int pet,int house) {
-                this.playerName = playerName;
-                this.wand = wand;
-                this.pet = pet;
-                this.house = house;
-            }
-
-        }
 
 
         Scanner scanner = new Scanner(System.in);
@@ -41,21 +21,19 @@ public class Main {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-        System.out.println("Tu as rendez-vous chez Olivander pour acheter ta baguette magique. C'est la baguette qui choisit son sorcier " + playerName +", te rappelles le vieil homme.");
-        int coreWand = random.nextInt(3 - 0) +1;
-        int sizeWand = random.nextInt(12 - 0) +20;
+        System.out.println("Tu as rendez-vous chez Olivander pour acheter ta baguette magique. C'est la baguette qui choisit son sorcier " + playerName + ", te rappelles le vieil homme.");
+        int coreWand = random.nextInt(3 - 0) + 1;
+        int sizeWand = random.nextInt(12 - 0) + 20;
         try {
             Thread.sleep(4000);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-        if (coreWand==1){
+        if (coreWand == 1) {
             System.out.println("Ca y est je le sens il y a un lien entre toi et cette baguette à crin de licorne !");
-        }
-        else if (coreWand==2){
+        } else if (coreWand == 2) {
             System.out.println("Ca y est je le sens il y a un lien entre toi et cette baguette à plume de phoenix !");
-        }
-        else{
+        } else {
             System.out.println("Ca y est je le sens il y a un lien entre toi et cette baguette à ventricule de dragon !");
         }
         try {
@@ -63,7 +41,7 @@ public class Main {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-        System.out.println("Elle mesure " +sizeWand +" cms");
+        System.out.println("Elle mesure " + sizeWand + " cms");
         try {
             Thread.sleep(4000);
         } catch (InterruptedException e) {
@@ -71,21 +49,21 @@ public class Main {
         }
         System.out.println("Maintenant, tu peux choisir un animal de compagnie");
         System.out.println("Tu peux choisir : 1)une chouette. 2)un rat. 3)un chat. 4)un crapaud.");
-        int validPet=0;
+        int validPet = 0;
         int pet = scanner.nextInt();
-        while (validPet==0) {
+        while (validPet == 0) {
             if (pet == 1) {
-                System.out.println("Une chouette, très bon choix.");
-                validPet=1;
+                System.out.println("Une chouette, très bon choix, ce rapace aux aptitudes inouïes surveillera tes arrières et te restera fidèle.");
+                validPet = 1;
             } else if (pet == 2) {
-                System.out.println("Un rat, très bon choix.");
-                validPet=1;
+                System.out.println("Un rat, très bon choix, ce petit rongeur peut se faufiler nimporte où et te sera d'une grande utilité.");
+                validPet = 1;
             } else if (pet == 3) {
-                System.out.println("Un chat, très bon choix.");
-                validPet=1;
+                System.out.println("Un chat, très bon choix, ce félin aux sens aiguisé t'aidera durant ton voyage à travers la magie.");
+                validPet = 1;
             } else if (pet == 4) {
-                System.out.println("Un crapaud, très bon choix.");
-                validPet=1;
+                System.out.println("Un crapaud, très bon choix, cet animal aux apparences hideuses est cependant une bête au grand coeur.");
+                validPet = 1;
             } else {
                 System.out.println("Entre un numéro valide.");
                 pet = scanner.nextInt();
@@ -96,27 +74,35 @@ public class Main {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-        System.out.println("Premier jour à Poudlard ; tu vas enfin connaitre ta maison. on pause le choipeau sur ta tête.");
-        int house = random.nextInt(4 - 0) +1;
+        System.out.println("Premier jour à Poudlard ; tu vas enfin connaitre ta maison. on pose le choipeau sur ta tête.");
+        int house = random.nextInt(4 - 0) + 1;
         try {
             Thread.sleep(4000);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-        if (house==1){
+        if (house == 1) {
             System.out.println("Griffondor, crie le choipeau !");
-        }
-        else if (house==2){
+        } else if (house == 2) {
             System.out.println("Serpentard, crie le choipeau !");
-        }
-        else if (house==3){
+        } else if (house == 3) {
             System.out.println("Serdaigle, crie le choipeau  !");
-        }
-        else{
+        } else {
             System.out.println("Poustouffle, crie le choipeau  !");
         }
         Wand wand = new Wand(coreWand, sizeWand);
-        Player player = new Player(playerName, wand, pet, house);
+        player = new Player(playerName, wand, pet, house);
+        play();
     }
+
+
+
+
+
+    public static void play() {
+
+        level1(player);
+    }
+
 
 }
