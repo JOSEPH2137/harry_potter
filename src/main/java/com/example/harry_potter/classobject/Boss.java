@@ -1,4 +1,4 @@
-package com.example.harry_potter;
+package com.example.harry_potter.classobject;
 
 public class Boss {
     public int pv;
