@@ -11,10 +11,11 @@ import java.util.Scanner;
 
 import static com.example.harry_potter.general.GameOver.gameOver;
 import static com.example.harry_potter.Main.menu;
+import static com.example.harry_potter.general.MakePotion.makePotion;
+import static com.example.harry_potter.general.StrangeEnd.strangeEnd;
 
 public class Level2 {
     public static void level2(Player player){
-        player.house=1;
         Boss basilic = new Boss( 200, 25);
         Boss jedusorBook = new Boss (1,0);
         Spell accio = new Spell(60,1,2);
@@ -46,7 +47,7 @@ public class Level2 {
             else if (choice==3){
                 if (player.house==1){
                     System.out.println("Le phoenix de Dumbledore t'apporte l'épée de griffondor.");
-                    griffondorSword(basilic,jedusorBook);
+                    griffondorSword(player,basilic,jedusorBook);
                 }
                 else {
                     System.out.println("Rien ne se passe");
@@ -54,7 +55,7 @@ public class Level2 {
             }
             if (basilic.pv < 1 ) {
                 System.out.println("Bravo, le Basilic est mort");
-                level2_5(player);
+                makePotion(player,3);
                 playlevel = false;
             } else if (player.pv < 1) {
                 gameOver();
@@ -63,12 +64,7 @@ public class Level2 {
             else if (jedusorBook.pv<1){
                 System.out.println(message);
                 System.out.println("Bravo, tu laisses le basilic enfermé à jamais dans la chambre des secrets.");
-                level2_5(player);
-                playlevel = false;
-            }
-            else if (jedusorBook.pv>10){
-                System.out.println("Le vol c'est mal. Dumbledor t'as retrouvé et tu es banni du monde des sorciers.");
-                gameOver();
+                makePotion(player,3);
                 playlevel = false;
             }
             else {
@@ -76,13 +72,13 @@ public class Level2 {
             }
         }
     }
-    public static void griffondorSword(Boss basilic, Boss jedusorBook) {
+    public static void griffondorSword(Player player,Boss basilic, Boss jedusorBook) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("\nQue veux tu faire : \n 1)voler l'épée de griffondor  \n 2)utiliser l'épée de griffondor pour combattre");
         int choice = scanner.nextInt();
         if (choice==1){
-            System.out.println("Le vol c'est mal. Dumbledor t'as retrouvé et tu es banni du monde des sorciers.");
-            gameOver();
+            System.out.println("Le vol c'est mal. Mais tu réuusi à échapper à la vigilance de Dumbledor. Tu revends l'épée et deviens super riche.");
+            strangeEnd(player);
         }
         else {
             System.out.println("Tu tranches la tête du Basilic");
@@ -123,32 +119,7 @@ public class Level2 {
         return message;
 
     }
-    public static void level2_5(Player player){
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Tu as du temps libre. Veux-tu concocter une potion ?");
-        System.out.println(" 1)oui \n 2)non");
-        int choice = scanner.nextInt();
-        if (choice==1) {
-            System.out.println("Laquelle ?");
-            choice = scanner.nextInt();
-            boolean findPotion = false;
-            for (Potion potion : player.knownPotion) {
-                if (potion.number == choice) {
-                    findPotion = true;
-                    if (potion.number==10){
-                        player.pv=player.pv +20;
-                        if (player.house==4){
-                            player.pv=player.pv+20;
-                        }
-                        System.out.println("tu as récupéré de la vie. Tu as maintenant : "+ Color.RED+" PV"+ player.pv+Color.RESET);
-                    }
-                }
-            }
-            if (findPotion==false){
-                System.out.println("Tu ne maitrise pas encore cette Potion. Tu as raté ta préparation. ");
-            }
-        }
-        menu(player,3);
-    }
+
+
 
 }

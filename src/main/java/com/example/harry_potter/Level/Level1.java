@@ -10,18 +10,18 @@ import java.util.Random;
 import java.util.Scanner;
 
 import static com.example.harry_potter.general.GameOver.gameOver;
-import static com.example.harry_potter.Main.menu;
+import static com.example.harry_potter.general.MakePotion.makePotion;
 
 
 public class Level1 {
     public static void level1(Player player){
         Boss troll = new Boss( 100, 20);
         Spell wingardiumLeviosa = new Spell(75,40,1);
-        Potion lifePotion= new Potion(10);
+        Potion lifePotion= new Potion(1);
         player.knownSpell.add(wingardiumLeviosa);
         player.knownPotion.add(lifePotion);
-        System.out.println("tu sais maintenant réalisé une potion de vie. le numéro qui lui est associé est le numéro 10");
-        System.out.println("tu as appris le sort wingardium leviosa. Pour l'utiliser tape 1 dans la console");
+        System.out.println("tu sais maintenant réalisé une potion de vie. C'est la potion numéro 1");
+        System.out.println("tu as appris le sort wingardium leviosa. C'est le sort numéro 1");
         System.out.println("un troll se balade dans les toilettes des filles. Tu décides d'aller le combattre.");
         if (player.house==3){
             wingardiumLeviosa.precision=wingardiumLeviosa.precision+20;
@@ -42,7 +42,6 @@ public class Level1 {
         boolean playlevel=true;
         while (playlevel == true) {
             System.out.println("\nQue veux tu faire : \n 1)lancer un sort \n 2)fuir \n 3)combattre à main nue.");
-            message = "";
             int choice = scanner.nextInt();
             if (choice == 1) {
                 System.out.println("Quel sort ?");
@@ -77,7 +76,7 @@ public class Level1 {
             }
             if (troll.pv < 1) {
                 System.out.println("Bravo, le troll est mort");
-                level1_5(player);
+                makePotion(player,2);
                 playlevel = false;
             } else if (player.pv < 1) {
                 gameOver();
@@ -87,31 +86,5 @@ public class Level1 {
             }
         }
     }
-    public static void level1_5(Player player){
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Tu as du temps libre. Veux-tu concocter une potion ?");
-        System.out.println(" 1)oui \n 2)non");
-        int choice = scanner.nextInt();
-        if (choice==1) {
-            System.out.println("Laquelle ?");
-            choice = scanner.nextInt();
-            boolean findPotion = false;
-            for (Potion potion : player.knownPotion) {
-                if (potion.number == choice) {
-                    findPotion = true;
-                    if (potion.number==10){
-                        player.pv=player.pv +20;
-                        if (player.house==4){
-                            player.pv=player.pv+20;
-                        }
-                        System.out.println("tu as récupéré de la vie. Tu as maintenant : "+ Color.RED+" PV"+ player.pv+Color.RESET);
-                    }
-                }
-            }
-            if (findPotion==false){
-                System.out.println("Tu ne maitrise pas encore cette Potion. Tu as raté ta préparation. ");
-            }
-        }
-        menu(player,2);
-    }
+
 }
