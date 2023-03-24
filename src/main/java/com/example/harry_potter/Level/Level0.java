@@ -15,8 +15,6 @@ import static com.example.harry_potter.Main.menu;
 
 public class Level0 {
 
-    private static Player player;
-
     public static void level0() {
 
 
@@ -73,7 +71,7 @@ public class Level0 {
         int pv = 100;
         List<Spell> knownSpell = new ArrayList();
         List<Potion> knownPotion = new ArrayList();
-        player = new Player(playerName, wand, pet, house, pv,knownSpell,knownPotion);
+        Player player = new Player(pv,playerName, wand, pet, house,knownSpell,knownPotion);
         menu(player,1);
     }
 

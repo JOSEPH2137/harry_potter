@@ -1,6 +1,5 @@
 package com.example.harry_potter.general;
 
-import com.example.harry_potter.classobject.Boss;
 import com.example.harry_potter.classobject.Player;
 
 public class StrangeEnd {

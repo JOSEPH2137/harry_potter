@@ -94,7 +94,6 @@ public class Level4 {
     }
     public static void spell(Player player,Boss voldemort) {
         Scanner scanner = new Scanner(System.in);
-        Random random = new Random();
         System.out.println("Quel sort ?");
         int sort = scanner.nextInt();
         boolean findSpell = false;
@@ -126,7 +125,7 @@ public class Level4 {
     }
     public static void defeat(Player player) {
         System.out.println("Malheuresement Voldemort t'a tué.");
-        gameOver();
+        gameOver(player,4);
 
     }
 }

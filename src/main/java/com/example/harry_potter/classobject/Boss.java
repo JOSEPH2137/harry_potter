@@ -1,11 +1,10 @@
 package com.example.harry_potter.classobject;
 
-public class Boss {
-    public int pv;
+public class Boss extends Character{
     public int attack;
 
     public Boss( int pv, int attack) {
-        this.pv = pv;
+        super(pv);
         this.attack = attack;
     }
 }

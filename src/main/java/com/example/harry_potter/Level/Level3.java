@@ -19,47 +19,50 @@ public class Level3 {
         discoverPatronum(player);
     }
     public static void discoverPatronum(Player player) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Tu as entendu parler des patronus et tu veux découvrir le tien. Tu vas t'entrainer dans la forêt.");
-        System.out.println("Il faut trouver quel animal te correspond");
-        System.out.println("Essaye de lancer le sort. Expecto patronum est le sort 3");
-        boolean havepatronus = false;
-        while (havepatronus == false) {
-            long startTime = System.currentTimeMillis();
-            int spell = scanner.nextInt();
-            long stopTime = System.currentTimeMillis();
-            long time = stopTime - startTime;
-            Patronus patronus = new Patronus(0, 0);
-            if (spell == 3) {
-                havepatronus = true;
-                System.out.println("Bravo tu as réussi à lancer le sort. ");
-                if (time < 3000) {
-                    System.out.println("De plus tu as réussi à le maîtriser très rapidement ! Ton patronum est une licorne");
-                    patronus.attack = 100;
-                    patronus.number = 1;
-                } else if (time < 8000) {
-                    System.out.println("tu le maîtrise assez bien ! Ton patronum est un cerf");
-                    patronus.attack = 80;
-                    patronus.number = 2;
-                } else if (time < 15000) {
-                    System.out.println("Mais tu as pris beaucoup de temps à la maîtriser ! Ton patronum est un poulain");
-                    patronus.attack = 60;
-                    patronus.number = 3;
+        if (player.knownSpell.size() < 3) {
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("Tu as entendu parler des patronus et tu veux découvrir le tien. Tu vas t'entrainer dans la forêt.");
+            System.out.println("Il faut trouver quel animal te correspond");
+            System.out.println("Essaye de lancer le sort. Expecto patronum est le sort 3");
+            boolean havepatronus = false;
+            while (havepatronus == false) {
+                long startTime = System.currentTimeMillis();
+                int spell = scanner.nextInt();
+                long stopTime = System.currentTimeMillis();
+                long time = stopTime - startTime;
+                Patronus patronus = new Patronus(0, 0);
+                if (spell == 3) {
+                    havepatronus = true;
+                    System.out.println("Bravo tu as réussi à lancer le sort. ");
+                    if (time < 3000) {
+                        System.out.println("De plus tu as réussi à le maîtriser très rapidement ! Ton patronum est une licorne");
+                        patronus.attack = 100;
+                        patronus.number = 1;
+                    } else if (time < 8000) {
+                        System.out.println("tu le maîtrise assez bien ! Ton patronum est un cerf");
+                        patronus.attack = 80;
+                        patronus.number = 2;
+                    } else if (time < 15000) {
+                        System.out.println("Mais tu as pris beaucoup de temps à la maîtriser ! Ton patronum est un poulain");
+                        patronus.attack = 60;
+                        patronus.number = 3;
+                    } else {
+                        System.out.println("Mais tu n'es pas très doué. tu as pris trop de temps à le maitriser! Ton patronum est un ragondin");
+                        patronus.attack = 50;
+                        patronus.number = 4;
+                    }
                 } else {
-                    System.out.println("Mais tu n'es pas très doué. tu as pris trop de temps à le maitriser! Ton patronum est un ragondin");
-                    patronus.attack = 50;
-                    patronus.number = 4;
+                    System.out.println("Tu n'as pas lancé le bon sort. Réessaie");
                 }
-            } else {
-                System.out.println("Tu n'as pas lancé le bon sort. Réessaie");
+                Spell expectoPatronum = new Spell(90, patronus.attack, 3);
+                player.knownSpell.add(expectoPatronum);
+                if (player.house == 3) {
+                    expectoPatronum.precision = expectoPatronum.precision + 10;
+                } else if (player.house == 2) {
+                    expectoPatronum.attack = expectoPatronum.attack + 20;
+                }
             }
-            Spell expectoPatronum = new Spell(90, patronus.attack, 3);
-            player.knownSpell.add(expectoPatronum);
-            if (player.house == 3) {
-                expectoPatronum.precision = expectoPatronum.precision + 10;
-            } else if (player.house == 2) {
-                expectoPatronum.attack = expectoPatronum.attack + 20;
-            }
+
         }
         fightLevel3(player);
     }
@@ -81,7 +84,7 @@ public class Level3 {
                     escape(player);
                     validnumber = 1;
                 } else if (choice == 3) {
-                    negociate(player, detraqueur);
+                    negociate(player);
                     validnumber = 1;
                 } else {
                     System.out.println("Entre un numéro valide.");
@@ -110,7 +113,7 @@ public class Level3 {
                 if (sort==1){
                     System.out.println("Ce sort est inutile ici.");
                 }
-                if (sort==2){
+                else if (sort==2){
                     System.out.println("Ce sort est inutile ici.");
                 }
                 else {
@@ -144,7 +147,7 @@ public class Level3 {
         System.out.println("Malheuresement pour toi, le detraqueur vole et se déplace donc plus vite que toi. Il te rattrape et vole ton âme.");
         player.pv=0;
     }
-    public static void negociate(Player player, Boss detraqueur) {
+    public static void negociate(Player player) {
         if (player.house==3){
             System.out.println("Tu commences à parler au détraqueur. Celui-ci se laisse convaincre grâce à ton noble coeur. Tu deviens le chef des détraqueurs.");
             strangeEnd(player);
@@ -161,7 +164,7 @@ public class Level3 {
     }
     public static void defeat(Player player) {
         System.out.println("Malheuresement le détraqueur t'a vainvu.");
-        gameOver();
+        gameOver(player,3);
 
     }
 }
