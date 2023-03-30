@@ -1,7 +1,8 @@
-package com.example.harry_potter;
+package com.example.harry_potter.console;
 
 
 import com.example.harry_potter.classobject.Player;
+import com.example.harry_potter.console.InputParser;
 
 import static com.example.harry_potter.Level.Level0.level0;
 
@@ -15,6 +16,8 @@ import static com.example.harry_potter.Level.Level7.level7;
 
 
 public class Main {
+
+    public static InputParser inputParser = new InputParser();
     public static void main(String[] args) {
         level0();
     }
@@ -46,6 +49,10 @@ public class Main {
         else if (level == 7) {
             System.out.println("Début de la septième année.");
             level7(player);
+        }
+        else  {
+            System.out.println("Bravo tu as gagné.");
+            System.exit(0);
         }
 
     }

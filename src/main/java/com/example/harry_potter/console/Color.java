@@ -1,4 +1,4 @@
-package com.example.harry_potter.general;
+package com.example.harry_potter.console;
 
 public class Color {
 
@@ -13,6 +13,7 @@ public class Color {
         public static final String PURPLE = "\u001B[35m";
         public static final String CYAN = "\u001B[36m";
         public static final String GRAY = "\u001B[37m";
+
 
     }
 

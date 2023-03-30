@@ -2,21 +2,23 @@ package com.example.harry_potter.general;
 
 import com.example.harry_potter.classobject.Player;
 import com.example.harry_potter.classobject.Potion;
+import com.example.harry_potter.console.Color;
 
-import java.util.Scanner;
 
-import static com.example.harry_potter.Main.menu;
+
+import static com.example.harry_potter.console.Main.menu;
+import static com.example.harry_potter.console.Display.printText;
+import static com.example.harry_potter.console.InputParser.getInt;
 
 public class MakePotion {
 
     public static void makePotion(Player player,int level){
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Tu as du temps libre. Veux-tu concocter une potion ?");
-        System.out.println(" 1)oui \n 2)non");
-        int choice = scanner.nextInt();
+        printText("Tu as du temps libre. Veux-tu concocter une potion ?");
+        printText(" 1)oui \n 2)non");
+        int choice=getInt();
         if (choice==1) {
-            System.out.println("Laquelle ?");
-            choice = scanner.nextInt();
+            printText("Laquelle ?");
+            choice=getInt();
             boolean findPotion = false;
             for (Potion potion : player.knownPotion) {
                 if (potion.number == choice) {
@@ -26,12 +28,12 @@ public class MakePotion {
                         if (player.house==4){
                             player.pv=player.pv+20;
                         }
-                        System.out.println("tu as récupéré de la vie. Tu as maintenant : "+ Color.RED+" PV"+ player.pv+Color.RESET);
+                        printText("tu as récupéré de la vie. Tu as maintenant : "+ Color.RED+" PV"+ player.pv+Color.RESET);
                     }
                 }
             }
             if (findPotion==false){
-                System.out.println("Tu ne maitrise pas encore cette Potion. Tu as raté ta préparation. ");
+                printText("Tu ne maitrise pas encore cette Potion. Tu as raté ta préparation. ");
             }
         }
         menu(player,level);

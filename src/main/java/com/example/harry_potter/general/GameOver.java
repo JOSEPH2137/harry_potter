@@ -2,19 +2,20 @@ package com.example.harry_potter.general;
 
 import com.example.harry_potter.classobject.Player;
 
-import java.util.Scanner;
 
-import static com.example.harry_potter.Main.menu;
+
+import static com.example.harry_potter.console.Main.menu;
+import static com.example.harry_potter.console.Display.printText;
+import static com.example.harry_potter.console.InputParser.getInt;
 
 public class GameOver {
     public static void  gameOver(Player player, int level){
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Tu as perdu. espèce de naze");
-        System.out.println("Veux tu reessayer le niveaux auquel tu as perdu ?");
-        System.out.println(" 1)oui \n 2)non");
-        int choice = scanner.nextInt();
+        printText("Tu as perdu. espèce de naze");
+        printText("Veux tu reessayer le niveaux auquel tu as perdu ?");
+        printText(" 1)oui \n 2)non");
+        int choice=getInt();
         if (choice==1) {
-            player.pv=100;
+            player.pv=500;
             menu(player,level);
         }
         else {
